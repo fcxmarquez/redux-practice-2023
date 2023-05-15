@@ -1,14 +1,24 @@
-import { Searcher } from "./components/Searcher";
-import { Col } from "antd";
-import "./styles/app.css";
+import { Searcher } from "@/components/Searcher";
+import { PokeList } from "@/components/PokeList";
+import { SearcherContainer, AppWrapper } from "@/styles/app.style";
+import { Row } from "antd";
+import { GlobalStyles } from "@/styles/GlobalStyles";
+
+const PokemonsMock = Array(10).fill("");
 
 function App() {
   return (
-    <div className="App">
-      <Col span={8} offset={8}>
-        <Searcher />
-      </Col>
-    </div>
+    <>
+      <GlobalStyles />
+      <AppWrapper className="App">
+        <Row justify={"center"}>
+          <SearcherContainer xs={16} sm={24}>
+            <Searcher />
+          </SearcherContainer>
+        </Row>
+        <PokeList pokemons={PokemonsMock} />
+      </AppWrapper>
+    </>
   );
 }
 

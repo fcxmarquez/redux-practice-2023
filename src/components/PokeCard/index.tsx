@@ -1,10 +1,20 @@
-import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
+import { PokeCardContainer } from "./styles";
+import { StarOutlined } from "@ant-design/icons";
 
 export const PokeCard = () => {
   return (
-    <Card title="Ditto" cover={<img src="" alt="Ditto" />}>
+    <PokeCardContainer
+      title="Ditto"
+      cover={
+        <img
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"
+          alt="Ditto"
+        />
+      }
+      extra={<StarOutlined />}
+    >
       <Meta description="fire, magic" />
-    </Card>
+    </PokeCardContainer>
   );
 };

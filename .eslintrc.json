@@ -62,6 +62,10 @@
     "import/resolver": {
       "node": {
         "extensions": [".ts", ".tsx"]
+      },
+      "alias": {
+        "map": [["@", "./src"]],
+        "extensions": [".ts", ".tsx", ".js", ".jsx"]
       }
     },
     "react": {
