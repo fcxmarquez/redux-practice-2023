@@ -1,16 +1,17 @@
 import { FC } from "react";
 import { PokeCard } from "@/components/PokeCard";
 import { PokeListContainer } from "./styles";
+import { PokemonType } from "@/api";
 
 type PokeListProps = {
-  pokemons: unknown[];
+  pokemons: PokemonType[];
 };
 
 export const PokeList: FC<PokeListProps> = ({ pokemons }) => {
   return (
     <PokeListContainer>
-      {pokemons.map((pokemon: unknown, index) => (
-        <PokeCard key={index} />
+      {pokemons.map((pokemon) => (
+        <PokeCard name={pokemon.name} key={pokemon.name} />
       ))}
     </PokeListContainer>
   );

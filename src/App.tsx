@@ -4,10 +4,21 @@ import { SearcherContainer, AppWrapper } from "@/styles/app.style";
 import { Col, Row } from "antd";
 import { GlobalStyles } from "@/styles/GlobalStyles";
 import logo from "@/assets/logo.svg";
-
-const PokemonsMock = Array(10).fill("");
+import { useEffect, useState } from "react";
+import { getPokemon, PokemonType } from "@/api";
 
 function App() {
+  const [pokemons, setPokemons] = useState<PokemonType[]>([]);
+
+  useEffect(() => {
+    const fetchPokemon = async () => {
+      const response = await getPokemon();
+      setPokemons(response);
+    };
+
+    fetchPokemon();
+  }, []);
+
   return (
     <>
       <GlobalStyles />
@@ -22,7 +33,7 @@ function App() {
             <Searcher />
           </SearcherContainer>
         </Row>
-        <PokeList pokemons={PokemonsMock} />
+        <PokeList pokemons={pokemons} />
       </AppWrapper>
     </>
   );
