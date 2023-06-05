@@ -4,16 +4,24 @@ import { SearcherContainer, AppWrapper } from "@/styles/app.style";
 import { Col, Row } from "antd";
 import { GlobalStyles } from "@/styles/GlobalStyles";
 import logo from "@/assets/logo.svg";
-import { useEffect, useState } from "react";
-import { getPokemon, PokemonType } from "@/api";
+import { useEffect } from "react";
+import { PokemonType, getPokemon } from "@/api";
+import { connect } from "react-redux";
+import { setPokemons as setPokemonsActions } from "@/actions";
+import { PokemonPayload } from "@/types/action.type";
+import { initialState } from "./reducers/pokemons";
+import { Dispatch } from "redux";
 
-function App() {
-  const [pokemons, setPokemons] = useState<PokemonType[]>([]);
+type AppProps = {
+  pokemons: PokemonType[];
+  setPokemons: (value: PokemonPayload) => void;
+};
 
+function App({ pokemons, setPokemons }: AppProps) {
   useEffect(() => {
     const fetchPokemon = async () => {
       const response = await getPokemon();
-      setPokemons(response);
+      setPokemons({ pokemons: response });
     };
 
     fetchPokemon();
@@ -39,4 +47,12 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state: typeof initialState) => ({
+  pokemons: state.pokemons,
+}); // a function that takes the state and returns an object
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setPokemons: (value: PokemonPayload) => dispatch(setPokemonsActions(value)),
+}); // a function that takes dispatch and returns an object
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
