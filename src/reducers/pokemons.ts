@@ -1,10 +1,15 @@
 import { Actions } from "@/actions";
 import { SET_POKEMONS } from "@/actions/types";
+import { PokemonType } from "@/api";
 
-export const initialState = {
+type initialStateType = {
+  pokemons: PokemonType[];
+};
+
+export const initialState: initialStateType = {
   pokemons: [],
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-} as any;
+};
 
 export const pokemonsReducer = (
   state = initialState,
