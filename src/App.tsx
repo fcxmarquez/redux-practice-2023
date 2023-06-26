@@ -5,7 +5,7 @@ import { Col, Row } from "antd";
 import { GlobalStyles } from "@/styles/GlobalStyles";
 import logo from "@/assets/logo.svg";
 import { useEffect } from "react";
-import { getPokemon } from "@/api";
+import { getPokemon, getPokemonDetails } from "@/api";
 import { useDispatch, useSelector } from "react-redux";
 import { setPokemons } from "@/actions";
 import { initialState } from "./reducers/pokemons";
@@ -18,7 +18,10 @@ function App() {
   useEffect(() => {
     const fetchPokemon = async () => {
       const response = await getPokemon();
-      dispatch(setPokemons(response));
+      const pokemonsWithDetails = await Promise.all(
+        response.map((pokemon) => getPokemonDetails(pokemon))
+      );
+      dispatch(setPokemons(pokemonsWithDetails));
     };
 
     fetchPokemon();

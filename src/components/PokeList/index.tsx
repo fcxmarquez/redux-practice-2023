@@ -11,7 +11,12 @@ export const PokeList: FC<PokeListProps> = ({ pokemons }) => {
   return (
     <PokeListContainer>
       {pokemons.map((pokemon) => (
-        <PokeCard name={pokemon.name} key={pokemon.name} />
+        <PokeCard
+          name={pokemon.name}
+          key={pokemon.name}
+          imgSrc={pokemon.sprites.front_default}
+          abilities={pokemon.abilities.map((ability) => ability.ability.name).join(", ")}
+        />
       ))}
     </PokeListContainer>
   );
