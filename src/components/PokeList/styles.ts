@@ -10,4 +10,8 @@ export const PokeListContainer = styled.div`
   margin: 0 auto;
   max-width: 1200px;
   width: 100%;
+
+  .spinner {
+    align-self: center;
+  }
 `;

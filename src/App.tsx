@@ -7,7 +7,7 @@ import logo from "@/assets/logo.svg";
 import { useEffect } from "react";
 import { getPokemon } from "@/api";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemonsWithDetails } from "@/actions";
+import { getPokemonsWithDetails, setLoading } from "@/actions";
 import { initialState } from "./reducers/pokemons";
 import { AppDispatch } from "./main";
 
@@ -17,8 +17,10 @@ function App() {
 
   useEffect(() => {
     const fetchPokemon = async () => {
+      dispatch(setLoading(true));
       const response = await getPokemon();
-      dispatch(getPokemonsWithDetails(response));
+      await dispatch(getPokemonsWithDetails(response));
+      dispatch(setLoading(false));
     };
 
     fetchPokemon();

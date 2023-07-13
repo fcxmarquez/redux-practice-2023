@@ -1,5 +1,5 @@
 import { PokemonType, getPokemonDetails } from "@/api";
-import { SET_POKEMONS } from "./types";
+import { SET_LOADING, SET_POKEMONS } from "./types";
 import { setPokemonAction } from "@/types/action.type";
 import { Dispatch } from "redux";
 
@@ -8,7 +8,10 @@ export interface ActionsMap {
     payload: PokemonType[];
     type: typeof SET_POKEMONS;
   };
-  // Add more action types here
+  [SET_LOADING]: {
+    payload: boolean;
+    type: typeof SET_LOADING;
+  };
 }
 
 export type Actions = ActionsMap[keyof ActionsMap];
@@ -17,6 +20,11 @@ export type Actions = ActionsMap[keyof ActionsMap];
 
 export const setPokemons = (payload: PokemonType[]): setPokemonAction => ({
   type: SET_POKEMONS,
+  payload,
+});
+
+export const setLoading = (payload: boolean) => ({
+  type: SET_LOADING,
   payload,
 });
 
