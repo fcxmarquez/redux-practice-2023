@@ -23,9 +23,9 @@ export const PokeList: FC<PokeListProps> = ({ pokemons }) => {
             name={pokemon.name}
             key={pokemon.name}
             imgSrc={pokemon.sprites.front_default}
-            abilities={pokemon.abilities
-              .map((ability) => ability.ability.name)
-              .join(", ")}
+            types={pokemon.types.map((type) => type.type.name).join(", ")}
+            id={pokemon.id}
+            isFavorite={pokemon.isFavorite}
           />
         ))
       )}

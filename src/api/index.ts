@@ -1,11 +1,14 @@
 import axios from "axios";
-import { Sprites, abilities } from "./pokemon.type";
+import { Sprites, TypeElement, abilities } from "./pokemon.type";
 
 export type PokemonType = {
   name: string;
   url: string;
   sprites: Sprites;
   abilities: abilities[];
+  types: TypeElement[];
+  id: number;
+  isFavorite: boolean;
 };
 
 export const getPokemon = (): Promise<PokemonType[]> => {

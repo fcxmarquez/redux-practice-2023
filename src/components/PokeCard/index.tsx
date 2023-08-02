@@ -1,22 +1,33 @@
 import Meta from "antd/es/card/Meta";
 import { PokeCardContainer } from "./styles";
-import { StarOutlined } from "@ant-design/icons";
 import { FC } from "react";
+import { StarButton } from "@/components/StarButton";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/main";
+import { setFavorite } from "@/actions";
 
 type PokeCardProps = {
   name: string;
   imgSrc: string;
-  abilities: string;
+  types: string;
+  id: number;
+  isFavorite: boolean;
 };
 
-export const PokeCard: FC<PokeCardProps> = ({ name, imgSrc, abilities }) => {
+export const PokeCard: FC<PokeCardProps> = ({ name, imgSrc, types, id, isFavorite }) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleFavorite = () => {
+    dispatch(setFavorite(id));
+  };
+
   return (
     <PokeCardContainer
       title={name}
       cover={<img src={imgSrc} alt="Ditto" />}
-      extra={<StarOutlined />}
+      extra={<StarButton isFavorite={isFavorite} onClick={handleFavorite} />}
     >
-      <Meta description={abilities} />
+      <Meta description={types} />
     </PokeCardContainer>
   );
 };

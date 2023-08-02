@@ -8,8 +8,8 @@ import { useEffect } from "react";
 import { getPokemon } from "@/api";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemonsWithDetails, setLoading } from "@/actions";
-import { initialState } from "./reducers/pokemons";
-import { AppDispatch } from "./main";
+import { initialState } from "@/reducers/pokemons";
+import { AppDispatch } from "@/main";
 
 function App() {
   const pokemons = useSelector((state: typeof initialState) => state.pokemons);

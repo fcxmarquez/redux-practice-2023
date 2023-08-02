@@ -122,3 +122,15 @@ export type Ability = {
   name: string;
   url: string;
 };
+
+// types
+
+export type TypeElement = {
+  slot: number;
+  type: TypeType;
+};
+
+export type TypeType = {
+  name: string;
+  url: string;
+};
