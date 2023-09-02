@@ -1,16 +1,17 @@
 import { Actions } from "@/types/action.type";
 import { SET_FAVORITE, SET_LOADING, SET_POKEMONS } from "@/actions/types";
 import { PokemonType } from "@/api";
+import { fromJS } from "immutable";
 
 export type initialStateType = {
   pokemons: PokemonType[];
   loading: boolean;
 };
 
-export const initialState: initialStateType = {
+export const initialState = fromJS({
   pokemons: [],
   loading: false,
-};
+});
 
 export const pokemonsReducer = (
   state = initialState,
@@ -18,27 +19,23 @@ export const pokemonsReducer = (
 ): typeof initialState => {
   switch (action.type) {
     case SET_POKEMONS:
-      return {
-        ...state,
-        pokemons: action.payload,
-      };
+      return state.setIn(["pokemons"], fromJS(action.payload));
 
     case SET_FAVORITE:
-      const index = state.pokemons.findIndex((pokemon) => pokemon.id === action.payload);
+      const pokemonId = action.payload;
 
-      if (index === -1) return state;
-
-      const newPokemons = [...state.pokemons];
-
-      newPokemons[index].isFavorite = !newPokemons[index].isFavorite;
-
-      return {
-        ...state,
-        pokemons: newPokemons,
-      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return state.updateIn(["pokemons"], (pokemons: any) =>
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        pokemons.map((pokemon: any) =>
+          pokemon.get("id") === pokemonId
+            ? pokemon.update("isFavorite", (isFavorite: boolean) => !isFavorite)
+            : pokemon
+        )
+      );
 
     case SET_LOADING:
-      return { ...state, loading: action.payload };
+      return state.setIn(["loading"], action.payload);
 
     default:
       return state;

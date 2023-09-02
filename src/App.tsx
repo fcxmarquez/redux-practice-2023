@@ -5,14 +5,16 @@ import { Col, Row } from "antd";
 import { GlobalStyles } from "@/styles/GlobalStyles";
 import logo from "@/assets/logo.svg";
 import { useEffect } from "react";
-import { getPokemon } from "@/api";
+import { PokemonType, getPokemon } from "@/api";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemonsWithDetails, setLoading } from "@/actions";
 import { initialState } from "@/reducers/pokemons";
 import { AppDispatch } from "@/main";
 
 function App() {
-  const pokemons = useSelector((state: typeof initialState) => state.pokemons);
+  const pokemons = useSelector((state: typeof initialState) =>
+    state.get("pokemons")
+  )?.toJS();
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -40,7 +42,7 @@ function App() {
             <Searcher />
           </SearcherContainer>
         </Row>
-        <PokeList pokemons={pokemons} />
+        <PokeList pokemons={pokemons as PokemonType[]} />
       </AppWrapper>
     </>
   );

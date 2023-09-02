@@ -11,7 +11,7 @@ type PokeListProps = {
 };
 
 export const PokeList: FC<PokeListProps> = ({ pokemons }) => {
-  const loading = useSelector((state: typeof initialState) => state.loading);
+  const loading = useSelector((state: typeof initialState) => state.get("loading"));
 
   return (
     <PokeListContainer>
