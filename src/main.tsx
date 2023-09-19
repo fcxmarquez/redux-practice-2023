@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { initialStateType, pokemonsReducer } from "./reducers/pokemons";
 import { Provider } from "react-redux";
 import {
   AnyAction,
@@ -11,14 +10,15 @@ import {
 } from "redux";
 import { logger } from "@/middlewares";
 import thunk, { ThunkDispatch } from "redux-thunk";
+import { rootReducer, CombinedInitialState } from "@/reducers/rootReducer";
 
 const composeAlt = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const composeEnhancers = composeAlt(applyMiddleware(thunk, logger));
 
-const store = createStore(pokemonsReducer, composeEnhancers);
+const store = createStore(rootReducer, composeEnhancers);
 
-export type AppDispatch = ThunkDispatch<initialStateType, unknown, AnyAction>;
+export type AppDispatch = ThunkDispatch<CombinedInitialState, unknown, AnyAction>;
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

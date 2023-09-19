@@ -1,16 +1,15 @@
-import { Actions } from "@/types/action.type";
-import { SET_FAVORITE, SET_LOADING, SET_POKEMONS } from "@/actions/types";
+import { Actions } from "@/actions/action.type";
+import { SET_FAVORITE, SET_POKEMONS } from "@/actions/types";
 import { PokemonType } from "@/api";
 import { fromJS } from "immutable";
 
-export type initialStateType = {
+export type PokemonsInitialState = {
   pokemons: PokemonType[];
-  loading: boolean;
 };
 
 export const initialState = fromJS({
+  // Immutable is not recommended actually
   pokemons: [],
-  loading: false,
 });
 
 export const pokemonsReducer = (
@@ -33,9 +32,6 @@ export const pokemonsReducer = (
             : pokemon
         )
       );
-
-    case SET_LOADING:
-      return state.setIn(["loading"], action.payload);
 
     default:
       return state;

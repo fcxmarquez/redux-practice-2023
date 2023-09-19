@@ -3,15 +3,15 @@ import { PokeCard } from "@/components/PokeCard";
 import { PokeListContainer } from "./styles";
 import { PokemonType } from "@/api";
 import { useSelector } from "react-redux";
-import { initialState } from "@/reducers/pokemons";
 import { Spin } from "antd";
+import { RootState } from "@/reducers/rootReducer";
 
 type PokeListProps = {
   pokemons: PokemonType[];
 };
 
 export const PokeList: FC<PokeListProps> = ({ pokemons }) => {
-  const loading = useSelector((state: typeof initialState) => state.get("loading"));
+  const loading = useSelector((state: RootState) => state.getIn(["ui", "loading"]));
 
   return (
     <PokeListContainer>

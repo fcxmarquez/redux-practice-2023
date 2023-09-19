@@ -1,9 +1,9 @@
 import { Middleware, Dispatch, AnyAction } from "redux";
-import { initialStateType } from "@/reducers/pokemons";
+import { CombinedInitialState } from "@/reducers/rootReducer";
 
 export const logger: Middleware<
   Record<string, never>,
-  initialStateType,
+  CombinedInitialState,
   Dispatch<AnyAction>
 > = () => (next) => (action) => {
   console.log(action);
@@ -12,7 +12,7 @@ export const logger: Middleware<
 
 export const featuring: Middleware<
   Record<string, never>,
-  initialStateType,
+  CombinedInitialState,
   Dispatch<AnyAction>
 > = () => (next) => (actionInfo) => {
   const featured = [{ name: "eddie" }, ...actionInfo.action.payload];

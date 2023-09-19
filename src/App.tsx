@@ -6,14 +6,16 @@ import { GlobalStyles } from "@/styles/GlobalStyles";
 import logo from "@/assets/logo.svg";
 import { useEffect } from "react";
 import { PokemonType, getPokemon } from "@/api";
-import { useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { getPokemonsWithDetails, setLoading } from "@/actions";
-import { initialState } from "@/reducers/pokemons";
 import { AppDispatch } from "@/main";
+import { RootState } from "./reducers/rootReducer";
+import { List } from "immutable";
 
 function App() {
-  const pokemons = useSelector((state: typeof initialState) =>
-    state.get("pokemons")
+  const pokemons = useSelector(
+    (state: RootState) =>
+      state.getIn(["data", "pokemons"], shallowEqual) as List<PokemonType>
   )?.toJS();
   const dispatch = useDispatch<AppDispatch>();
 
