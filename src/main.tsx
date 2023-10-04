@@ -10,7 +10,7 @@ import {
 } from "redux";
 import { logger } from "@/middlewares";
 import thunk, { ThunkDispatch } from "redux-thunk";
-import { rootReducer, CombinedInitialState } from "@/reducers/rootReducer";
+import { rootReducer, RootState } from "@/reducers/rootReducer";
 
 const composeAlt = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -18,7 +18,7 @@ const composeEnhancers = composeAlt(applyMiddleware(thunk, logger));
 
 const store = createStore(rootReducer, composeEnhancers);
 
-export type AppDispatch = ThunkDispatch<CombinedInitialState, unknown, AnyAction>;
+export type AppDispatch = ThunkDispatch<RootState, unknown, AnyAction>;
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

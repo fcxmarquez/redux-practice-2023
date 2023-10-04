@@ -4,7 +4,7 @@ import { FC } from "react";
 import { StarButton } from "@/components/StarButton";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/main";
-import { setFavorite } from "@/actions";
+import { setFavorite } from "@/slices/dataSlice";
 
 type PokeCardProps = {
   name: string;

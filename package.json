@@ -2,6 +2,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
     "@redux-devtools/extension": "^3.2.5",
+    "@reduxjs/toolkit": "^1.9.6",
     "antd": "^5.4.2",
     "axios": "^1.4.0",
     "immutable": "^4.3.2",

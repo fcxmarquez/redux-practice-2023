@@ -7,16 +7,14 @@ import logo from "@/assets/logo.svg";
 import { useEffect } from "react";
 import { PokemonType, getPokemon } from "@/api";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { getPokemonsWithDetails, setLoading } from "@/actions";
+import { getPokemonsWithDetails } from "@/actions";
+import { setLoading } from "@/slices/uiSlice";
 import { AppDispatch } from "@/main";
 import { RootState } from "./reducers/rootReducer";
-import { List } from "immutable";
 
 function App() {
-  const pokemons = useSelector(
-    (state: RootState) =>
-      state.getIn(["data", "pokemons"], shallowEqual) as List<PokemonType>
-  )?.toJS();
+  const pokemons = useSelector((state: RootState) => state.data.pokemons, shallowEqual);
+
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
