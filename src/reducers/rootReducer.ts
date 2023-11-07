@@ -9,7 +9,4 @@ export const rootReducer = combineReducers({
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
-export type RootState = {
-  data: ReturnType<typeof dataReducer>;
-  ui: ReturnType<typeof uiReducer>;
-};
+export type RootState = ReturnType<typeof rootReducer>;

@@ -2,8 +2,7 @@ import Meta from "antd/es/card/Meta";
 import { PokeCardContainer } from "./styles";
 import { FC } from "react";
 import { StarButton } from "@/components/StarButton";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/main";
+import { useAppDispatch } from "@/main";
 import { setFavorite } from "@/slices/dataSlice";
 
 type PokeCardProps = {
@@ -15,7 +14,7 @@ type PokeCardProps = {
 };
 
 export const PokeCard: FC<PokeCardProps> = ({ name, imgSrc, types, id, isFavorite }) => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   const handleFavorite = () => {
     dispatch(setFavorite(id));

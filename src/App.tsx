@@ -5,27 +5,20 @@ import { Col, Row } from "antd";
 import { GlobalStyles } from "@/styles/GlobalStyles";
 import logo from "@/assets/logo.svg";
 import { useEffect } from "react";
-import { PokemonType, getPokemon } from "@/api";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { getPokemonsWithDetails } from "@/actions";
-import { setLoading } from "@/slices/uiSlice";
-import { AppDispatch } from "@/main";
+import { PokemonType } from "@/api";
+import { shallowEqual, useSelector } from "react-redux";
+import { useAppDispatch } from "@/main";
 import { RootState } from "./reducers/rootReducer";
+import { fetchPokemonsWithDetails } from "./slices/dataSlice";
 
 function App() {
   const pokemons = useSelector((state: RootState) => state.data.pokemons, shallowEqual);
 
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const fetchPokemon = async () => {
-      dispatch(setLoading(true));
-      const response = await getPokemon();
-      await dispatch(getPokemonsWithDetails(response));
-      dispatch(setLoading(false));
-    };
-
-    fetchPokemon();
+    dispatch({ type: "TEST_ACTION" });
+    dispatch(fetchPokemonsWithDetails());
   }, []);
 
   return (
