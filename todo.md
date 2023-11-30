@@ -2,6 +2,7 @@
 - Make the search through the API (backend). It can use the same redux method, it is using the searchedPokemons state
 - Add loading skeleton
 - Adde persistancy on the favorites
+- Add some testing
 
 ## Actual
 
