@@ -12,5 +12,5 @@ export const AppWrapper = styled.div`
 `;
 
 export const SearcherContainer = styled(Col)`
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 `;

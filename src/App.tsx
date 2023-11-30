@@ -1,7 +1,7 @@
 import { Searcher } from "@/components/Searcher";
 import { PokeList } from "@/components/PokeList";
 import { SearcherContainer, AppWrapper } from "@/styles/app.style";
-import { Col, Row } from "antd";
+import { Col, Row, Button } from "antd";
 import { GlobalStyles } from "@/styles/GlobalStyles";
 import logo from "@/assets/logo.svg";
 import { useEffect } from "react";
@@ -9,17 +9,24 @@ import { PokemonType } from "@/api";
 import { shallowEqual, useSelector } from "react-redux";
 import { useAppDispatch } from "@/main";
 import { RootState } from "./reducers/rootReducer";
-import { fetchPokemonsWithDetails } from "./slices/dataSlice";
+import { fetchPokemonsWithDetails, resetSearch } from "./slices/dataSlice";
 
 function App() {
   const pokemons = useSelector((state: RootState) => state.data.pokemons, shallowEqual);
+  const searchedPokemons = useSelector(
+    (state: RootState) => state.data.searchedPokemons,
+    shallowEqual
+  );
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch({ type: "TEST_ACTION" });
     dispatch(fetchPokemonsWithDetails());
   }, []);
+
+  const handleResetFilter = () => {
+    dispatch(resetSearch());
+  };
 
   return (
     <>
@@ -35,7 +42,24 @@ function App() {
             <Searcher />
           </SearcherContainer>
         </Row>
-        <PokeList pokemons={pokemons as PokemonType[]} />
+        {searchedPokemons.length > 0 ? (
+          <Row justify={"center"}>
+            <Col xs={8}>
+              <Button
+                type="primary"
+                style={{ width: "100%" }}
+                onClick={handleResetFilter}
+              >
+                Reset Filter
+              </Button>
+            </Col>
+          </Row>
+        ) : null}
+        <PokeList
+          pokemons={
+            searchedPokemons.length > 0 ? searchedPokemons : (pokemons as PokemonType[])
+          }
+        />
       </AppWrapper>
     </>
   );

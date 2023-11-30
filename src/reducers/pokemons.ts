@@ -5,6 +5,7 @@ import { fromJS } from "immutable";
 
 export type PokemonsInitialState = {
   pokemons: PokemonType[];
+  searchedPokemons: PokemonType[];
 };
 
 export const initialState = fromJS({
